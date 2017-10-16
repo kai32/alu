@@ -65,8 +65,8 @@ module mojo_top (
     io_led[2] = tester.out;
     
     
-    io_led[0] = a;
-    io_led[1] = b;
+    io_led[0] = tester.expected;
+ 
     
     
     addsub.alufn0 = alufn[0]; // wire up alufn0
@@ -97,17 +97,22 @@ module mojo_top (
 
     case (alufn[5:4]) {
       0: // 0 is for add
-        if (alufn[0]== 0){
+        if (alufn[1]== 0){
           tester.detected = addsub.s;
+          io_led[1] = addsub.s;
         } else {
           tester.detected = mul.out;
+          io_led[1] = mul.out;
         }
       1: // 1 is for boole
         tester.detected = boolean.out;
+        io_led[1] = boolean.out;
       2:
         tester.detected = shifter.out;
+        io_led[1] = shifter.out;
       3: 
         tester.detected = comparator.out;
+        io_led[1] = comparator.out;
     }
   }
 }

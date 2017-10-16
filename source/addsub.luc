@@ -12,9 +12,9 @@ module addsub (
 
   always {
     if (alufn0 == 0) { // if alufn0 is 0, this should perform an addition
-      s = a + b;
+      s = $signed(a) + $signed(b);
     } else { // else if will perform a subtraction
-      s = a - b;
+      s = $signed(a) - $signed(b);
     }
   }
 }
