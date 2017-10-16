@@ -1,0 +1,73 @@
+module tester (
+    input clk,  // clock
+    input rst,  // reset
+    input trigger, // use for triggering next state
+    input button, // use to start testing
+    input detected[8],
+    output expected[8],
+    output a[8],
+    output b[8],
+    output alufn[6],
+    output out[8]
+  ) {
+  
+  .clk(clk) {
+    .rst(rst) {
+      fsm state = {IDLE, ADD1, ADD2, ADD3, WRONG}; // default will be IDLE
+    }
+  }
+  var exp;
+  always {
+    out = 0;
+    a = 8b0;
+    b = 8b0;
+    alufn = 6b0;
+    exp = 8b0;
+    expected = exp;
+    
+    case(state.q) {
+      state.IDLE:
+        out =  8x{1};
+        if (button) {
+          state.d = state.ADD1;
+        }
+      state.ADD1:
+        a = 8b00001010;
+        b = 8b00001100;
+        exp = 8b00010110;
+        alufn = 6b000000;
+        if (trigger) {
+          if (exp == detected) {
+            state.d = state.ADD2;
+          } else {
+            state.d = state.WRONG;
+          }
+        }
+       state.ADD2:
+        a = 8b11001000;
+        b = 8b00110111;
+        exp = 8b1111111;
+        alufn = 6b000000;
+        if (trigger) {
+          if (exp == detected) {
+            state.d = state.ADD3;
+          } else {
+            state.d = state.WRONG;
+          }
+        }
+       state.ADD3:
+        a = 8b01100100;
+        b = 8b00101110;
+        exp = 8b10010010;
+        alufn = 6b000000;
+        if (trigger) {
+          if (exp == detected) {
+            state.d = state.IDLE;
+          } else {
+            state.d = state.WRONG;
+          }
+        }
+    }
+    
+  }
+}

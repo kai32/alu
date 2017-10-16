@@ -1,0 +1,18 @@
+module trigger (
+    input clk,  // clock
+    input rst,  // reset
+    output out
+  ) {
+
+  .clk(clk){
+     edge_detector edge(#RISE(1), #FALL(0));
+    .rst(rst) { 
+      dff counter[25]; // 0.67seconds as period
+    }
+  }
+  always {
+     edge.in = counter.q[24];
+     counter.d = counter.q + 1;
+     out = edge.out; // the output will be 1 whenever the most significant bit changes to 1
+  }
+}

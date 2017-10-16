@@ -5,6 +5,8 @@
     <src>boolean.luc</src>
     <src>shifter.luc</src>
     <src>addsub.luc</src>
+    <src>tester.luc</src>
+    <src>trigger.luc</src>
     <src top="true">mojo_top.luc</src>
     <src>comparator.luc</src>
     <ucf lib="true">io_shield.ucf</ucf>
@@ -13,5 +15,6 @@
     <component>reset_conditioner.luc</component>
     <component>pipeline.luc</component>
     <component>button_conditioner.luc</component>
+    <component>edge_detector.luc</component>
   </files>
 </project>
