@@ -4,19 +4,17 @@ module shifter (
     input a[8],
     input b[8], // for encoding number of bits to shift. will only use lowest 4 bits (at most shift 8 bits)
     input alufn10[2], // for selecting operations
-    output out
+    output out[8]
   ) {
-  var temp[16]; // 16 bit to store left shift 8
   always {
-    temp = 0; // default
-    out = temp[7:0];
+    out = 0;
     case (alufn10){
       0: // 0 is 00 for shift left
-        temp = (a << 4); // hard code for testing
+        out = (a << b[3:0]); // hard code for testing
       1: // 1 is 01 for SHR
-        temp = (a >> b[3:0]);
+        out = (a >> b[3:0]);
       3: // 3 is 11 for SHA
-        temp = (a >>> b[3:0]);
+        out = (a >>> b[3:0]);
     }
   }
 }
