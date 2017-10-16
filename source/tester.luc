@@ -19,7 +19,7 @@ module tester (
   var exp;
   
   always {
-    out = 8x{1};
+    out = 8x{0};
     a = 8b0;
     b = 8b0;
     alufn = 6b0;
@@ -28,7 +28,7 @@ module tester (
     
     case(state.q) {
       state.IDLE:
-        out =  8x{0};
+        out =  8x{1};
         if (button) {
           state.d = state.ADD1;
         }

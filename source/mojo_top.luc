@@ -27,16 +27,12 @@ module mojo_top (
     reset_conditioner reset_cond;
     button_conditioner button_conditioner;
     .rst(rst) {
-      
-      addsub addsub;
-      comparator comparator;
-      boolean boolean;
-      shifter shifter;
-      mul mul;
       trigger trigger;
       tester tester;
     }
   }
+  
+  alu alu;
   
   sig a[8];
   sig b[8];  
@@ -63,55 +59,21 @@ module mojo_top (
     a = tester.a; // use a from tester as a for alu
     b = tester.b; // use b from tester as b for alu
     alufn = tester.alufn; // use alufn from tester as alufn for alu
-    io_seg = tester.out; // display test status
+    io_seg = ~tester.out; // display test status
     
     io_led[0] = a; // display current a 
     io_led[1] = b; // display current b
     io_led[2][5:0] = alufn; // display current alufn
- 
+     
+    //wire up alu
+    alu.a = a;
+    alu.b = b;
+    alu.alufn = alufn;
     
+    tester.detected = alu.out;
+    led = alu.out; // display alu output
     
-    addsub.alufn0 = alufn[0]; // wire up alufn0
-    addsub.a = a;
-    addsub.b = b;
-
-    
-    comparator.alufn1 = alufn[1];
-    comparator.alufn2 = alufn[2];
-    comparator.a = a;
-    comparator.b = b;
-    
-    boolean.alufn3210 = alufn[3:0];
-    boolean.a = a;
-    boolean.b = b;
-
-    
-    shifter.alufn10 = alufn[1:0];
-    shifter.a = a;
-    shifter.b = b;
-    
-    mul.a = a;
-    mul.b = b;
     
 
-    case (alufn[5:4]) {
-      0: // 0 is for add
-        if (alufn[1]== 0){ // add / sub
-          tester.detected = addsub.s;
-          led = addsub.s;
-        } else { // multiply
-          tester.detected = mul.out;
-          led = mul.out;
-        }
-      1: // 1 is for boole
-        tester.detected = boolean.out;
-        led = boolean.out;
-      2: // 2 is for shifter
-        tester.detected = shifter.out;
-        led = shifter.out;
-      3: // 3 is for comparator
-        tester.detected = comparator.out;
-        led = comparator.out;
-    }
   }
 }

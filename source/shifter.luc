@@ -1,6 +1,4 @@
 module shifter (
-    input clk,  // clock
-    input rst,  // reset
     input a[8],
     input b[8], // for encoding number of bits to shift. will only use lowest 4 bits (at most shift 8 bits)
     input alufn10[2], // for selecting operations

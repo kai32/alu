@@ -2,9 +2,7 @@ module addsub (
     input alufn0,
     input a[8],
     input b[8],
-    output s[8],
-    input clk,
-    input rst
+    output s[8]
   ) {
   /*
     This module is responsible for performing addition and subtraction. Unlike lab3, tt will not output z v and n for use in the comparator

@@ -1,0 +1,46 @@
+module alu (
+    input a[8],
+    input b[8],
+    input alufn[6],
+    output out[8]
+  ) {
+  
+    .a(a){
+      .b(b) {
+        addsub addsub;
+        comparator comparator;
+        boolean boolean;
+        shifter shifter;
+        mul mul;
+      }
+    }
+  
+
+  always {
+    out = 0;
+    addsub.alufn0 = alufn[0]; // wire up alufn0
+
+    comparator.alufn1 = alufn[1];
+    comparator.alufn2 = alufn[2];
+
+    boolean.alufn3210 = alufn[3:0];
+    
+    shifter.alufn10 = alufn[1:0];
+    
+
+    case (alufn[5:4]) {
+      0: // 0 is for add
+        if (alufn[1]== 0){ // add / sub
+          out = addsub.s;
+        } else { // multiply
+          out = mul.out;
+        }
+      1: // 1 is for boole
+        out = boolean.out;
+      2: // 2 is for shifter
+        out = shifter.out;
+      3: // 3 is for comparator
+        out = comparator.out;
+    }
+  }
+}

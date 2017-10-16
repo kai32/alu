@@ -1,6 +1,4 @@
 module boolean (
-    input clk,  // clock
-    input rst,  // reset
     input a[8],
     input b[8],
     input alufn3210[4], // alufn[3:0] for selecting operation
