@@ -2,6 +2,7 @@
 <project name="alu" board="Mojo V3" language="Lucid">
   <files>
     <src>boolean.luc</src>
+    <src>shifter.luc</src>
     <src>addsub.luc</src>
     <src top="true">mojo_top.luc</src>
     <src>comparator.luc</src>

@@ -32,6 +32,7 @@ module mojo_top (
       addsub addsub;
       comparator comparator;
       boolean boolean;
+      shifter shifter;
     }
   }
   
@@ -52,7 +53,7 @@ module mojo_top (
     io_sel = 4hf;           // select no digits
     
     a = 33;
-    b = 13;
+    b = 4;
     
     button_conditioner0.in = io_button[0]; // for use in testing to switch alufn0 value
     button_conditioner1.in = io_button[1]; // for use in testing to switch alufn1 value
@@ -74,5 +75,10 @@ module mojo_top (
     boolean.a = a;
     boolean.b = b;
     io_led[2] = boolean.out;
+    
+    shifter.alufn10 = c{button_conditioner1.out, button_conditioner0.out};
+    shifter.a = a;
+    shifter.b = b;
+    io_led[1] = shifter.out;
   }
 }
