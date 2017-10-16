@@ -14,7 +14,7 @@ module shifter (
       1: // 1 is 01 for SHR
         out = (a >> b[3:0]);
       3: // 3 is 11 for SHA
-        out = (a >>> b[3:0]);
+        out = ($signed(a) >>> b[3:0]);
     }
   }
 }
