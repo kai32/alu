@@ -1,0 +1,22 @@
+module comparator (
+    input clk,  // clock
+    input rst,  // reset
+    input a[8],
+    input b[8],
+    input alufn2, // used for selecting operation
+    input alufn1, // used for selecting operation
+    output out
+  ) {
+
+  always {
+    out = 8b0; // default. used when alufn2 == 0 && alufn1 == 0. invalid so output 0
+    if (alufn2 == 1 && alufn1 == 1) { // less than equal 
+      out = a <= b;
+    } else if (alufn2 == 0 && alufn1 == 1) { // equality
+      out = a == b;
+    } else if (alufn2 == 1 && alufn1 == 0) { // less than
+      out = a < b;
+    }
+  
+  }
+}
