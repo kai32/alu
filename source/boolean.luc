@@ -1,0 +1,25 @@
+module boolean (
+    input clk,  // clock
+    input rst,  // reset
+    input a[8],
+    input b[8],
+    input alufn3210[4], // alufn[3:0] for selecting operation
+    output out[8]
+  ) {
+  /*
+    this component will be responsible for performing boolean function - and, or, xor and 'a'
+  */
+  always {
+    out = 0; // set default
+    case(alufn3210) {
+      8: // 8 is 1000, hence AND
+        out = a & b;
+      14: // 14 is 1110, hence OR
+        out = a | b;
+      6: // 6 is 0110, hence XOR
+        out = a ^ b;
+      10: // 10 is 1010, hence 'A'
+        out = a;   
+    }
+  }
+}

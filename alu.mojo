@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="alu" board="Mojo V3" language="Lucid">
   <files>
+    <src>boolean.luc</src>
     <src>addsub.luc</src>
     <src top="true">mojo_top.luc</src>
     <src>comparator.luc</src>

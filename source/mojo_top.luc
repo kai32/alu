@@ -27,12 +27,16 @@ module mojo_top (
     button_conditioner button_conditioner0;
     button_conditioner button_conditioner1;
     button_conditioner button_conditioner2;
+    button_conditioner button_conditioner3;
     .rst(rst) {
       addsub addsub;
       comparator comparator;
+      boolean boolean;
     }
   }
   
+  var a;
+  var b;
   
   always {
     reset_cond.in = ~rst_n; // input raw inverted reset signal
@@ -47,19 +51,28 @@ module mojo_top (
     io_seg = 8hff;          // turn segments off
     io_sel = 4hf;           // select no digits
     
+    a = 33;
+    b = 13;
+    
     button_conditioner0.in = io_button[0]; // for use in testing to switch alufn0 value
     button_conditioner1.in = io_button[1]; // for use in testing to switch alufn1 value
     button_conditioner2.in = io_button[2]; // for use in testing to switch alufn2 value
+    button_conditioner3.in = io_button[3]; // for use in testing to switch alufn2 value
     
     addsub.alufn0 = button_conditioner0.out; // wire up alufn0
-    addsub.a = 33;
-    addsub.b = 13;
+    addsub.a = a;
+    addsub.b = b;
     io_led[0] = addsub.s;
     
     comparator.alufn1 = button_conditioner1.out;
     comparator.alufn2 = button_conditioner2.out;
-    comparator.a = 33;
-    comparator.b = 33;
+    comparator.a = a;
+    comparator.b = b;
     io_led[1] = comparator.out;
+    
+    boolean.alufn3210 = c{button_conditioner3.out,button_conditioner2.out,button_conditioner1.out,button_conditioner0.out};
+    boolean.a = a;
+    boolean.b = b;
+    io_led[2] = boolean.out;
   }
 }
