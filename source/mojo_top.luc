@@ -33,6 +33,7 @@ module mojo_top (
       comparator comparator;
       boolean boolean;
       shifter shifter;
+      mul mul;
     }
   }
   
@@ -80,5 +81,9 @@ module mojo_top (
     shifter.a = a;
     shifter.b = b;
     io_led[1] = shifter.out;
+    
+    mul.a = a;
+    mul.b = b;
+    led = mul.out;
   }
 }

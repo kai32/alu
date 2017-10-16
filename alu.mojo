@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="alu" board="Mojo V3" language="Lucid">
   <files>
+    <src>mul.luc</src>
     <src>boolean.luc</src>
     <src>shifter.luc</src>
     <src>addsub.luc</src>
