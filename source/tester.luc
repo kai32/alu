@@ -17,6 +17,7 @@ module tester (
     }
   }
   var exp;
+  
   always {
     out = 0;
     a = 8b0;
@@ -618,7 +619,7 @@ module tester (
         }
         
       state.WRONG:
-        out = 8b01010101;
+        out = 8b01001001;
         if (button) {
           state.d = state.IDLE;
         }

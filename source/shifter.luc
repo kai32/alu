@@ -10,7 +10,7 @@ module shifter (
     out = 0;
     case (alufn10){
       0: // 0 is 00 for shift left
-        out = (a << b[3:0]); // hard code for testing
+        out = (a << b[3:0]); 
       1: // 1 is 01 for SHR
         out = (a >> b[3:0]);
       3: // 3 is 11 for SHA
