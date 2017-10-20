@@ -10,7 +10,7 @@ module tester (
     output alufn[6],
     output out[8]
   ) {
-  
+  //Declaring all the state
   .clk(clk) {
     .rst(rst) {
       fsm state = {IDLE,ADD1,ADD2,ADD3,SUB1,SUB2,SUB3,CMPEQ1,CMPEQ2,CMPLT1,CMPLT2,CMPLT3,CMPLE1,CMPLE2,CMPLE3,AND1,AND2,AND3,AND4,OR1,OR2,OR3,OR4,XOR1,XOR2,XOR3,XOR4,A,SHL1,SHL2,SHL3,SHL4,SHL5,SHR1,SHR2,SHR3,SHR4,SHR5,SRA1,SRA2,SRA3,SRA4,SRA5,WRONG}; // default will be IDLE
@@ -18,6 +18,7 @@ module tester (
   }
   var exp;
   
+  //Declaring all the I/O for test cases
   always {
     out = 8x{0};
     a = 8b0;
@@ -26,12 +27,14 @@ module tester (
     exp = 8b0;
     expected = exp;
     
+    //Idle case
     case(state.q) {
       state.IDLE:
         out =  8x{1};
         if (button) {
           state.d = state.ADD1;
         }
+      //Checking whether 10+12 = 22
       state.ADD1:
         a = 8b00001010;
         b = 8b00001100;
