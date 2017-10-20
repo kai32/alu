@@ -34,7 +34,7 @@ module tester (
         if (button) {
           state.d = state.ADD1;
         }
-      //Checking whether 10+12 = 22
+      //Checking adding whether 10+12 = 22
       state.ADD1:
         a = 8b00001010;
         b = 8b00001100;
@@ -48,6 +48,7 @@ module tester (
             state.d = state.WRONG;
           }
         }
+       //Checking adding whether -56+55 = -1
        state.ADD2:
         a = 8b11001000;
         b = 8b00110111;
@@ -61,6 +62,7 @@ module tester (
             state.d = state.WRONG;
           }
         }
+        //Checking adding whether 100+46 = 146
        state.ADD3:
         a = 8b01100100;
         b = 8b00101110;
@@ -74,6 +76,7 @@ module tester (
             state.d = state.WRONG;
           }
         }
+        //Checking adding whether 10+12 = -2
        state.SUB1:
         a = 8b00001010;
         b = 8b00001100;
@@ -89,6 +92,7 @@ module tester (
         }
       
       state.SUB2:
+      //Checking adding whether 10+12 = -2
         a = 8b11001000;
         b = 8b00110111;
         exp = 8b10010001;
